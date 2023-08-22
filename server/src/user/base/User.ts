@@ -11,11 +11,12 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional } from "class-validator";
+import { IsDate, IsString, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { Wishlist } from "../../wishlist/base/Wishlist";
 
 @ObjectType()
 class User {
@@ -79,6 +80,15 @@ class User {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Wishlist],
+  })
+  @ValidateNested()
+  @Type(() => Wishlist)
+  @IsOptional()
+  wishlists?: Array<Wishlist>;
 }
 
 export { User as User };

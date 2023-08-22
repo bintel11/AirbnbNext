@@ -1,4 +1,5 @@
 import { InputJsonValue } from "../../types";
+import { WishlistCreateNestedManyWithoutUsersInput } from "./WishlistCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
   firstName?: string | null;
@@ -6,4 +7,5 @@ export type UserCreateInput = {
   password: string;
   roles: InputJsonValue;
   username: string;
+  wishlists?: WishlistCreateNestedManyWithoutUsersInput;
 };
